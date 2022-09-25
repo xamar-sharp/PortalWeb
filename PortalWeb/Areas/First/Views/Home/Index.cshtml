@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+ViewData["Title"]=localizer["Title"];
+}
+@inject IViewLocalizer localizer
+@inject IAvatarMemento avatar
+@model ServiceWayModel
+<p>@localizer["Alert"].Value</p>
+<img src="data:image/jpeg;base64,@Convert.ToBase64String(avatar.TryLoad(Context,out bool res))"/>
+<div asp-validation-summary="ModelOnly">
+
+</div>
+<form asp-antiforgery="true" asp-action="ToService" method="post">
+    <div>
+        @Html.LabelFor(model=>model.Intent)
+        <select asp-for="Intent" asp-items="@(Html.GetEnumSelectList<ServiceType>())">
+</select>
+        <span asp-validation-for="Intent"></span>
+    </div>
+    <div>
+        <button type="submit">
+            @localizer["Submit"]
+        </button>
+    </div>
+</form>
+<div>
+    <list count="3" display-value="@localizer["Thanks"].Value">
+       <p>Hello world!</p>
+    </list>
+</div>

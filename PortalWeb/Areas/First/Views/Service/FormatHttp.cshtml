@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = localizer["Title"].Value;
+}
+@inject IViewLocalizer localizer
+@model HttpResponseModel
+<h1>@(Model.Success ? localizer["Success"].Value:localizer["Failed"].Value)</h1>
+<div>
+    <p>@(localizer["ContentType"].Value+" "+Model.ContentType)</p>
+</div>
+<div>
+   <p>@(localizer["ContentLength"].Value+" "+Model.ContentLength)</p>
+</div>
+<h2>@(localizer["Headers"].Value +" "+Model.Headers)</h2>
+<h5>@Model.Content</h5>

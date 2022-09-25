@@ -1,0 +1,66 @@
+﻿@*
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	ViewData["Title"] = localizer["Title"].Value;
+}
+@inject IViewLocalizer localizer
+@model HttpRequestModel
+<h1>@localizer["Description"].Value</h1>
+<div asp-validation-summary="ModelOnly">
+</div>
+<form asp-antiforgery="true" method="post" enctype="multipart/form-data">
+	<div>
+		@Html.LabelFor(ent=>ent.Url)
+		@Html.TextBoxFor(ent=>ent.Url,"",new {
+		type="url"
+		})
+		<span asp-validation-for="Url"></span>
+	</div>
+	<div>
+		@Html.LabelFor(ent=>ent.Method)
+
+		@Html.DropDownListFor(ent=>ent.Method,Html.GetEnumSelectList<MethodName>())
+
+		<span asp-validation-for="Method"></span>
+	</div>
+	<div>
+		@Html.LabelFor(ent=>ent.MimeType)
+		@Html.TextBoxFor(ent=>ent.MimeType,"",new {
+		type="text"
+		})
+		<span asp-validation-for="MimeType"></span>
+	</div>
+	<div>
+		@Html.LabelFor(ent=>ent.Content)
+		@Html.TextBoxFor(ent=>ent.Content,"",new {
+		type="file"
+		})
+		<span asp-validation-for="Content"></span>
+	</div>
+	<div>
+		<button type="submit">
+			@localizer["Submit"].Value
+		</button>
+	</div>
+</form>
+<h1>@localizer["Comments"]</h1>
+<form asp-antiforgery="true" asp-action="PostComment" method="post">
+	<input type="hidden" name="intent" value="HttpInvoke"/>
+	<div>
+		<input type="text" name="title" />
+	</div>
+	<div>
+		<textarea rows="10" cols="50" name="description"></textarea>
+	</div>
+	<div>
+		<select name="rateLevel" asp-items="Html.GetEnumSelectList<RateLevel>()">
+		</select>
+	</div>
+	<div>
+		<button type="submit">
+			@localizer["Submit"].Value
+		</button>
+	</div>
+</form>
+@(await Component.InvokeAsync<PortalWeb.ViewComponents.CommentsViewComponent>(new {}))

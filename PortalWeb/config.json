@@ -1,0 +1,12 @@
+{
+    "Queries": ["hack","sharp","hell"],
+    "IPAddresses": ["192.168.0.0"],
+    "Headers": [ "Cors-Ignore" ],
+    "HttpTimeout": 300,
+    "CacheLifetime": 120,
+    "LoggingPath": "C:\\0\\PortalWeb\\Logs\\lifetime.txt",
+    "CookieMaxAge": 120,
+    "ConnectionStrings": {
+        "default": "TrustServerCertificate=true;Server=DESKTOP-LM4Q538\\SECURESERVER;Database=CSABase;User ID=sa;Password=NullForMeCable"
+    }
+}

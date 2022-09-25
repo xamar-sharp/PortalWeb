@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = localizer["Title"].Value;
+    await Html.RenderPartialAsync("DateView");
+}
+@model AuthorizationModel
+@inject IViewLocalizer localizer
+@inject IPasswordCacher cache
+<h1>@localizer["Description"].Value</h1>
+<span>@localizer["OldPassword"].Value@cache.Password</span>
+<div asp-validation-summary="ModelOnly">
+
+</div>
+<form asp-antiforgery="true" method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="Login"/>
+        <input asp-for="Login" type="text"/>
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div>
+        <label asp-for="Email"/>
+        <input asp-for="Email" type="email"/>
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="Password"/>
+        <input asp-for="Password" type="password"/>
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <button type="submit">
+            @localizer["Submit"].Value
+        </button>
+    </div>
+</form>
+@section Additional{
+    @Html.ActionLink(localizer["SignUp"].Value,"Register","Account")
+}

@@ -1,0 +1,14 @@
+﻿@*
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IList<Comment>
+<li>
+	@for (int x = 0; x < @Model.Count; x++)
+	{
+		<ul>
+			@(Model[x].Title+">>"+Model[x].RateLevel+"<<"+Model[x].Description)
+		</ul>
+	}
+</li>
